@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sih26138-green-fleet"
+version = "0.1.0"
+description = "Quantum-Inspired Fuel Consumption Prediction and Green Fleet Optimization — SIH 2026 Problem Statement SIH26138"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "SIH 2026 Team" }]
+keywords = ["sih2026", "green-fleet", "optimisation", "quantum-inspired", "maritime"]
+
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+    "xgboost>=2.0",
+    "lightgbm>=4.3",
+    "scipy>=1.13",
+    "pydantic>=2.5",
+    "pyyaml>=6.0",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "streamlit>=1.35",
+    "matplotlib>=3.9",
+    "seaborn>=0.13",
+    "joblib>=1.4",
+    "pyarrow>=15",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov",
+    "jupyter>=1.0",
+    "ipykernel>=2.10",
+    "ruff>=0.4",
+    "black>=24",
+    "mypy>=1.10",
+    "pre-commit",
+    "pdfplumber>=0.11",  # PDF ingestion tooling (dev-only)
+]
+dashboard = ["streamlit>=1.35"]
+
+[project.scripts]
+sih26138 = "src.sih26138.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["."]
